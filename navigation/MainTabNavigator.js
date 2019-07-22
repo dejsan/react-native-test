@@ -2,76 +2,53 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import MyShiftsScreen from '../screens/MyShiftsScreen';
+import AvailableShiftsScreen from '../screens/AvailableShiftsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const MyShiftsStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    MyShifts: MyShiftsScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+MyShiftsStack.navigationOptions = {
+  tabBarLabel: 'My shifts',
 };
 
-HomeStack.path = '';
+MyShiftsStack.path = '';
 
-const LinksStack = createStackNavigator(
+const AvailableShiftsStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Links: AvailableShiftsScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+AvailableShiftsStack.navigationOptions = {
+  tabBarLabel: 'Available shifts',
 };
 
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
-SettingsStack.path = '';
+AvailableShiftsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+        MyShiftsStack,
+        AvailableShiftsStack,
+    }, 
+    {  
+        tabBarOptions: {
+            tabStyle: {
+                justifyContent: 'center'
+            },
+            showIcon: false
+        },
+    }
+);
 
 tabNavigator.path = '';
 
