@@ -22,23 +22,23 @@ export default class CancelButton extends Component {
       isLoading: true,
     });
 
-    return fetch(Api.base+'/shifts/'+id+'/cancel')
+    return fetch(Api.base + '/shifts/' + id + '/cancel')
       .then((response) => response.json())
       .then((responseJson) => {
-        if(responseJson.statusCode == '404'){
+        this.setState({
+          isLoading: false,
+          disabled: true,
+        });
+        if (responseJson.statusCode == '404') {
           alert('Not found');
           Alert.alert('Not found');
-        } else if(responseJson.statusCode == '200'){
+        } else if (responseJson.statusCode == '200') {
           alert('Done');
           Alert.alert('Done');
         } else {
           alert(responseJson.statusCode);
           Alert.alert(responseJson.statusCode);
         }
-        this.setState({
-          isLoading: false,
-          disabled: true,
-        });
       })
       .catch((error) => {
         this.setState({
