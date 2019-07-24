@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Colors from '../../constants/Colors';
-
 import CancelButton from './CancelButton';
 
 export default function SectionItem(props) {

@@ -3,7 +3,6 @@ import { StyleSheet, View, SectionList } from 'react-native';
 
 import DummyData from '../constants/DummyData';
 import Colors from '../constants/Colors';
-
 import SectionHeader from '../components/myShifts/SectionHeader';
 import SectionItem from '../components/myShifts/SectionItem';
 
