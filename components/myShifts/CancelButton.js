@@ -29,15 +29,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderColor: Colors.red2,
     borderWidth: 1,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     paddingVertical: 5,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center"
   },
   cancelButtonText: {
-    fontSize: 16,
-    fontWeight: '400',
+    fontSize: 14,
+    fontWeight: 'bold',
     color: Colors.red3,
   }
 });
