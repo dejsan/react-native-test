@@ -25,11 +25,10 @@ export default class CancelButton extends Component {
     return fetch(Api.base+'/shifts/'+id+'/cancel')
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
-        if(responseJson.statusCode === '404'){
+        if(responseJson.statusCode == '404'){
           alert('Not found');
           Alert.alert('Not found');
-        } else if(responseJson.statusCode === '200'){
+        } else if(responseJson.statusCode == '200'){
           alert('Done');
           Alert.alert('Done');
         } else {
