@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Platform, Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import Colors from '../../constants/Colors';
 import Api from '../../constants/Api';
@@ -17,36 +17,45 @@ export default class CancelButton extends Component {
 
   cancelShift = () => {
     const { id } = this.props;
+    const { isLoading } = this.state;
 
-    this.setState({
-      isLoading: true,
-    });
-
-    return fetch(Api.base + '/shifts/' + id + '/cancel')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          disabled: true,
-        });
-        if (responseJson.statusCode == '404') {
-          alert('Not found');
-          Alert.alert('Not found');
-        } else if (responseJson.statusCode == '200') {
-          alert('Done');
-          Alert.alert('Done');
-        } else {
-          alert(responseJson.statusCode);
-          Alert.alert(responseJson.statusCode);
-        }
-      })
-      .catch((error) => {
-        this.setState({
-          isLoading: false,
-        });
-        alert('Server error, please try again later.');
-        Alert.alert('Server error, please try again later.');
+    if (!isLoading) {
+      this.setState({
+        isLoading: true,
       });
+
+      return fetch(Api.base + '/shifts/' + id + '/cancel')
+        .then((response) => response.json())
+        .then((responseJson) => {
+
+          this.setState({
+            isLoading: false
+          });
+
+          if (responseJson.statusCode == '404') {
+            Platform.OS == 'web' ? alert('Not found') : Alert.alert('Not found');
+          } else if (responseJson.statusCode == '200') {
+            this.setState({
+              disabled: true
+            });
+            Platform.OS == 'web' ? alert('Done') : Alert.alert('Done');
+          } else {
+            Platform.OS == 'web' ? alert(responseJson.statusCode) : Alert.alert(responseJson.statusCode);
+          }
+
+        })
+        .catch((error) => {
+
+          this.setState({
+            isLoading: false,
+          });
+          Platform.OS == 'web' ?
+            alert('Server error, please try again later.')
+            :
+            Alert.alert('Server error, please try again later.');
+
+        });
+    }
   }
 
   render() {
