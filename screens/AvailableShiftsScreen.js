@@ -1,15 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { Text, ScrollView, StyleSheet } from 'react-native';
 
 export default function AvailableShiftsScreen() {
   return (
     <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
+      <Text style={{fontSize: 20, alignSelf: "center"}}>Available Shifts Screen</Text>
     </ScrollView>
   );
 }

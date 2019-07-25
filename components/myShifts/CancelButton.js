@@ -24,7 +24,7 @@ export default class CancelButton extends Component {
         isLoading: true,
       });
 
-      return fetch(Api.base + '/shifts/' + id + '/cancel')
+      return fetch(Api.base + '/shifts/' + id + '/cancel', {method: 'POST'})
         .then((response) => response.json())
         .then((responseJson) => {
 
@@ -32,13 +32,13 @@ export default class CancelButton extends Component {
             isLoading: false
           });
 
-          if (responseJson.statusCode == '404') {
-            Platform.OS == 'web' ? alert('Not found') : Alert.alert('Not found');
-          } else if (responseJson.statusCode == '200') {
+          if (responseJson.statusCode == '200') {
             this.setState({
               disabled: true
             });
             Platform.OS == 'web' ? alert('Done') : Alert.alert('Done');
+          } else if (responseJson.statusCode == '404') {
+            Platform.OS == 'web' ? alert('Not found') : Alert.alert('Not found');
           } else {
             Platform.OS == 'web' ? alert(responseJson.statusCode) : Alert.alert(responseJson.statusCode);
           }
